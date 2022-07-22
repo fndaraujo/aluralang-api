@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 public class LangController {
@@ -15,5 +17,10 @@ public class LangController {
 	public List<Language> getLangs() {
 		List<Language> languages = repository.findAll();
 		return languages;
+	}
+
+	@PostMapping(value = "/langs")
+	public void pushLanguage(@RequestBody Language language) {
+		repository.save(language);
 	}
 }
